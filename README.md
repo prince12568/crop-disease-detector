@@ -120,4 +120,4 @@ Weights are not stored in this repository because of file size. Train them with 
 
 ## Author
 
-_Your name_ · [GitHub](https://github.com/prince12568) · [LinkedIn](https://www.linkedin.com/in/prince-hadke-57465a31b/)
+_Prince Hadke_ · [GitHub](https://github.com/prince12568) · [LinkedIn](https://www.linkedin.com/in/prince-hadke-57465a31b/)
