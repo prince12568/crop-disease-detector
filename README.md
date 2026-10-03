@@ -94,7 +94,7 @@ docker run -p 8000:8000 crop-detector
 
 ### Model weights
 
-Weights are not stored in this repository because of file size. Train them with the commands above, or download them from: _add link (Hugging Face / Google Drive)_.
+Weights are not stored in this repository because of file size. Train them with the commands above, or download them from: _[Hugging Face](https://huggingface.co/QuantumToken/crop-disease-detector/tree/main)_.
 
 ## Limitations
 
@@ -115,9 +115,8 @@ Weights are not stored in this repository because of file size. Train them with 
 
 ## Datasets and references
 
-- **PlantVillage**: Hughes, D. P. & Salathé, M. (2015). *An open access repository of images on plant health to enable the development of mobile disease diagnostics.* 15-class pepper/potato/tomato subset obtained from Kaggle (_add exact dataset link_).
-- **PlantDoc**: Singh, D. et al. (2020). *PlantDoc: A Dataset for Visual Plant Disease Detection.* ACM CoDS-COMAD 2020 (arXiv:1911.10317). CC BY 4.0. Used via the `Project-AgML/plant_doc_classification` copy on Hugging Face.
-
+- **PlantVillage**: Hughes, D. P. & Salathé, M. (2015). *An open access repository of images on plant health to enable the development of mobile disease diagnostics.* 15-class pepper/potato/tomato subset obtained from [Kaggle](https://www.kaggle.com/datasets/arjuntejaswi/plant-village).
+- **PlantDoc**: Singh, D. et al. (2020). *PlantDoc: A Dataset for Visual Plant Disease Detection.* ACM CoDS-COMAD 2020 (arXiv:1911.10317). CC BY 4.0. Used via the [`Project-AgML/plant_doc_classification`](https://huggingface.co/datasets/Project-AgML/plant_doc_classification) copy on Hugging Face.
 ## Author
 
 _Prince Hadke_ · [GitHub](https://github.com/prince12568) · [LinkedIn](https://www.linkedin.com/in/prince-hadke-57465a31b/)
