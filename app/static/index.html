@@ -1,0 +1,33 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Leaf check</title>
+<style>
+:root{--bg:#f3f5ee;--ink:#1f2a1c;--leaf:#2f6b3a;--soft:#dfe7d3;--warn:#a4561a}
+@media(prefers-color-scheme:dark){:root{--bg:#141a12;--ink:#e6ecdc;--leaf:#7cc48a;--soft:#243020;--warn:#e0a060}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Georgia,serif}
+main{max-width:720px;margin:0 auto;padding:40px 20px}
+h1{font-size:2.2rem;margin:0 0 4px}p.sub{margin:0 0 28px;opacity:.75}
+label.drop{display:block;border:2px dashed var(--leaf);border-radius:6px;padding:36px;text-align:center;cursor:pointer;background:var(--soft)}
+label.drop:focus-within{outline:3px solid var(--leaf)}input{position:absolute;opacity:0;width:1px;height:1px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0}img{width:100%;border-radius:4px}
+.bar{height:8px;background:var(--soft);border-radius:4px;margin:2px 0 12px}.bar i{display:block;height:100%;background:var(--leaf);border-radius:4px}
+.warn{color:var(--warn);font-weight:bold}[hidden]{display:none}@media(max-width:520px){.row{grid-template-columns:1fr}}
+</style></head><body><main>
+<h1>Leaf check</h1><p class="sub">Upload a clear photo of one leaf to see the likely disease.</p>
+<label class="drop"><input id="f" type="file" accept="image/jpeg,image/png">Choose a leaf photo</label>
+<p id="msg" role="status"></p>
+<section id="out" hidden><div class="row"><div><img id="orig" alt="Your photo"><small>Your photo</small></div>
+<div><img id="heat" alt="Heatmap of areas the model used"><small>Areas the model focused on</small></div></div>
+<p id="warn" class="warn" hidden>Low confidence. Retake the photo in good light with the leaf filling the frame.</p>
+<div id="preds"></div></section>
+<script>
+const $=id=>document.getElementById(id);
+$("f").onchange=async e=>{const file=e.target.files[0];if(!file)return;
+ $("msg").textContent="Analyzing...";$("out").hidden=true;$("orig").src=URL.createObjectURL(file);
+ const fd=new FormData();fd.append("file",file);
+ try{const r=await fetch("/predict",{method:"POST",body:fd});const d=await r.json();
+  if(!r.ok)throw new Error(d.detail||"Request failed");
+  $("heat").src=d.heatmap;$("warn").hidden=!d.low_confidence;
+  $("preds").innerHTML=d.predictions.map(p=>`<div>${p.label.replaceAll("_"," ")} <b>${(p.confidence*100).toFixed(1)}%</b></div><div class="bar"><i style="width:${p.confidence*100}%"></i></div>`).join("");
+  $("msg").textContent="";$("out").hidden=false;
+ }catch(err){$("msg").textContent=err.message}};
+</script></main></body></html>
